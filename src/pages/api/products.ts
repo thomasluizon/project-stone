@@ -2748,6 +2748,16 @@ export default async function handler(
 
    const usedNames: string[] = [];
 
+   const categories: string[] = [
+      't-shirt',
+      'shirts',
+      'dresses',
+      'skirts',
+      'shorts',
+      'pants',
+      'socks',
+   ];
+
    const response: string = await fetch(
       'https://br.depositphotos.com/stock-photos/pedra.html'
    ).then(res => res.text());
@@ -2775,6 +2785,11 @@ export default async function handler(
             let random: number = Math.floor(Math.random() * names.length);
             let name: string = names[random];
 
+            let randomCategory: number = Math.floor(
+               Math.random() * categories.length
+            );
+            let category: string = categories[randomCategory];
+
             while (usedNames.includes(name)) {
                random = Math.floor(Math.random() * names.length);
                name = names[random];
@@ -2784,6 +2799,7 @@ export default async function handler(
 
             const obj: Product = {
                image: e as string,
+               category,
                name: `Pedra ${name}`,
                description: generateDescription(`Pedra ${name}`),
                id: i + 1,
