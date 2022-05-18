@@ -14,9 +14,6 @@ const GlobalStyle = createGlobalStyle`
 		outline: none;
 		appearance: none;
 	}
-	body {
-		background: red;
-	}
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -24,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<>
 			<GlobalStyle />
 			<ThemeProvider theme={theme}>
-				<Component {...pageProps} />;
+				<Component {...pageProps} />
 			</ThemeProvider>
 		</>
 	);
