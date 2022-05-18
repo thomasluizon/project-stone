@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 const theme: DefaultTheme = {
-	flex: (justify: string, align: string) => {
+	flex: (justify: string = 'center', align: string = 'center') => {
 		return `
          display: flex;
          align-items: ${align};
@@ -14,6 +14,14 @@ const theme: DefaultTheme = {
 		 		display: flex;
 				flex-direction: column;
 		 `;
+	},
+	colors: {
+		bg: '#0d0e0d',
+		grey: '#0D0F0D',
+		white: '#E8E8E8',
+		primary: '#41DB81',
+		secondary: '#006B10',
+		terciary: '#48A84E',
 	},
 };
 

@@ -16,6 +16,12 @@
 		"incremental": true,
 		"noImplicitAny": true
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"src/global/Container.jsx",
+		"src/global/Container.jsx"
+	],
 	"exclude": ["node_modules"]
 }
