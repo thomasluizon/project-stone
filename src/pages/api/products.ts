@@ -2772,7 +2772,7 @@ export default async function handler(
    let imgSrcFilter: RegExp = new RegExp('(?<=src=")(.+?)(?=")', 'gi');
 
    if (typeof picturesTag != null) {
-      let imgSrcs: Product[] = (picturesTag as RegExpMatchArray)
+      let stones: Product[] = (picturesTag as RegExpMatchArray)
          .map(e => {
             let filteredElement: RegExpMatchArray | null =
                e.match(imgSrcFilter);
@@ -2810,7 +2810,7 @@ export default async function handler(
             return obj;
          });
 
-      res.status(200).json({ imgSrcs });
+      res.status(200).json({ stones });
    }
 }
 
