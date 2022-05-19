@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Product } from '../../core/product';
+import type { IProduct } from '../../core/product';
 
 import nameData from '../../data/stoneNames.json';
 import descriptionData from '../../data/descriptionNames.json';
@@ -36,7 +36,7 @@ export default async function handler(
    let imgSrcFilter: RegExp = new RegExp('(?<=src=")(.+?)(?=")', 'gi');
 
    if (typeof picturesTag != null) {
-      let stones: Product[] = (picturesTag as RegExpMatchArray)
+      let stones: IProduct[] = (picturesTag as RegExpMatchArray)
          .map(e => {
             let filteredElement: RegExpMatchArray | null =
                e.match(imgSrcFilter);
@@ -62,13 +62,20 @@ export default async function handler(
 
             usedNames.push(name);
 
-            const obj: Product = {
+            let centsArray = [
+               0.5, 0.99, 0.1, 0.23, 0.45, 0.78, 0.98, 0.7, 0.65, 0.32, 0.05,
+            ];
+
+            const obj: IProduct = {
                image: e as string,
                category,
                name: `Pedra ${name}`,
                description: generateDescription(`Pedra ${name}`),
                id: i + 1,
                sales: Math.floor(Math.random() * 2000),
+               price:
+                  Math.floor(Math.random() * 200) +
+                  centsArray[Math.floor(Math.random() * centsArray.length)],
             };
 
             return obj;
