@@ -2788,6 +2788,7 @@ export default async function handler(
             let randomCategory: number = Math.floor(
                Math.random() * categories.length
             );
+
             let category: string = categories[randomCategory];
 
             while (usedNames.includes(name)) {
@@ -2803,6 +2804,7 @@ export default async function handler(
                name: `Pedra ${name}`,
                description: generateDescription(`Pedra ${name}`),
                id: i + 1,
+               sales: Math.floor(Math.random() * 2000),
             };
 
             return obj;

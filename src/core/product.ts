@@ -4,4 +4,5 @@ export interface Product {
    category: string;
    name: string;
    id: number;
+   sales: number;
 }
