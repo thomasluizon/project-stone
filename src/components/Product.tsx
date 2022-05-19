@@ -15,20 +15,11 @@ const ProductStyled = styled.div`
 	border-radius: 0.75rem;
 	overflow: hidden;
 	cursor: pointer;
-
-	small {
-		max-width: 300px;
-		max-height: 100px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
+	transition: 0.3s height;
+	height: 370px;
 
 	&:hover {
-		small {
-			white-space: unset;
-			text-overflow: unset;
-		}
+		height: 500px;
 	}
 
 	.desc {
@@ -60,6 +51,7 @@ const Product = (props: ProductProps) => {
 						layout="responsive"
 						src={props.img}
 						alt="Stone image"
+						sizes="50vw"
 					/>
 				</div>
 				<div className="desc">
