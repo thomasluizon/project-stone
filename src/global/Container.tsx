@@ -17,7 +17,7 @@ const Container = (props: ContainerProps) => {
 	return (
 		<ContainerStyled
 			maxWidth={props.maxWidth || '960px'}
-			padding={props.padding || '0 1rem'}
+			padding={props.padding || '0 2rem'}
 		>
 			{props.children}
 		</ContainerStyled>

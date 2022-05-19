@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 import Container from '../global/Container';
+import Title from './Title';
 
 const HeaderStyled = styled.header`
 	background-color: ${props => props.theme.colors.grey};
@@ -27,17 +28,11 @@ const HeaderStyled = styled.header`
 	}
 `;
 
-const Title = styled.h1`
-	font-size: 1.5rem;
-	font-weight: lighter;
-	cursor: pointer;
-`;
-
 const Header = () => {
 	const theme = useTheme();
 	return (
 		<HeaderStyled theme={theme}>
-			<Container padding="0 2rem">
+			<Container>
 				<div className="wrapper">
 					<Link href="/">
 						<Title>Project Stone (pedra)</Title>

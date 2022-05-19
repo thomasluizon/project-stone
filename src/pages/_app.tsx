@@ -18,20 +18,21 @@ const GlobalStyle = createGlobalStyle`
 		color: ${theme.colors.white};
 		text-decoration: none;
 		list-style: none;
+		font-weight: 300;
 	}
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
-   return (
-      <>
-         <GlobalStyle />
-         <ThemeProvider theme={theme}>
-            <Layout>
-               <Component {...pageProps} />
-            </Layout>
-         </ThemeProvider>
-      </>
-   );
+	return (
+		<>
+			<GlobalStyle />
+			<ThemeProvider theme={theme}>
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</ThemeProvider>
+		</>
+	);
 }
 
 export default MyApp;
