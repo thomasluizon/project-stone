@@ -11,6 +11,10 @@ interface ProductProps {
 
 const ProductStyled = styled.div`
 	${props => props.theme.flexcol()};
+	img {
+		width: 250px;
+		height: 250px;
+	}
 	width: 30%;
 
 	border-radius: 0.75rem;
