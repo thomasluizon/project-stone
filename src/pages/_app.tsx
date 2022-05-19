@@ -23,16 +23,16 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
-	return (
-		<>
-			<GlobalStyle />
-			<ThemeProvider theme={theme}>
-				<Layout>
-					<Component {...pageProps} />
-				</Layout>
-			</ThemeProvider>
-		</>
-	);
+   return (
+      <>
+         <GlobalStyle />
+         <ThemeProvider theme={theme}>
+            <Layout>
+               <Component {...pageProps} />
+            </Layout>
+         </ThemeProvider>
+      </>
+   );
 }
 
 export default MyApp;
