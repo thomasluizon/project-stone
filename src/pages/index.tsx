@@ -5,9 +5,10 @@ import Container from '../global/Container';
 import Title from '../components/Title';
 import Products from '../components/Products';
 import { useEffect, useState } from 'react';
+import { IProduct } from '../core/product';
 
 export const getStaticProps = async () => {
-	const stones = await fetch('http://localhost:3000/api/products')
+	const stones = await fetch('https://project-stone.vercel.app/api/products')
 		.then(res => res.json())
 		.then(json => json);
 
@@ -26,12 +27,13 @@ const HomeSection = styled.section`
 	}
 `;
 
-const Home: NextPage = props => {
-	const [products, setProducts] = useState([]);
+const Home: NextPage = (props: any) => {
+	const [products, setProducts] = useState<IProduct[]>([]);
 
 	useEffect(() => {
-		console.log(props.stones);
-	}, []);
+		const productsArr = props.stones.stones;
+		setProducts(productsArr);
+	}, [props.stones]);
 
 	const theme = useTheme();
 	return (
@@ -46,7 +48,7 @@ const Home: NextPage = props => {
 							<header>
 								<Title>Products</Title>
 							</header>
-							<Products />
+							<Products products={products} />
 						</div>
 					</Container>
 				</HomeSection>

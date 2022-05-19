@@ -12,6 +12,7 @@ interface ProductsProps {
 }
 
 const Products = (props: ProductsProps) => {
+	// console.log(props.products);
 	const theme = useTheme();
 	return <StyledProducts theme={theme}></StyledProducts>;
 };
