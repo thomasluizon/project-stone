@@ -13,6 +13,7 @@ export const getStaticProps = async () => {
 		.then(json => json);
 
 	return {
+		revalidate: 86400,
 		props: {
 			stones,
 		},

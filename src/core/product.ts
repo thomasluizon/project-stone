@@ -5,4 +5,5 @@ export interface IProduct {
 	name: string;
 	id: number;
 	sales: number;
+	price: number;
 }

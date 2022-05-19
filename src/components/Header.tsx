@@ -35,7 +35,9 @@ const Header = () => {
 			<Container>
 				<div className="wrapper">
 					<Link href="/">
-						<Title>Project Stone (pedra)</Title>
+						<a>
+							<Title>Project Stone (pedra)</Title>
+						</a>
 					</Link>
 					<nav>
 						<ul>
