@@ -7,7 +7,6 @@ interface TitleProps {
 const TitleStyled = styled.h2`
 	font-size: 1.5rem;
 	font-weight: lighter;
-	cursor: pointer;
 `;
 
 const Title = (props: TitleProps) => {
