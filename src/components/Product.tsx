@@ -1,6 +1,6 @@
 import styled, { useTheme } from 'styled-components';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface ProductProps {
 	img: string;
@@ -11,15 +11,11 @@ interface ProductProps {
 
 const ProductStyled = styled.div`
 	${props => props.theme.flexcol()};
-	img {
-		width: 250px;
-		height: 250px;
-	}
 	width: 30%;
-
 	border-radius: 0.75rem;
 	overflow: hidden;
 	cursor: pointer;
+
 	small {
 		max-width: 300px;
 		max-height: 100px;
@@ -57,15 +53,18 @@ const Product = (props: ProductProps) => {
 	return (
 		<Link href="/">
 			<ProductStyled theme={theme}>
-				<Image
-					src={props.img}
-					width="250px"
-					height="250px"
-					alt="Product Image"
-				/>
+				<div>
+					<Image
+						width="250px"
+						height="250px"
+						layout="responsive"
+						src={props.img}
+						alt="Stone image"
+					/>
+				</div>
 				<div className="desc">
 					<h3>{props.name}</h3>
-					<p>{props.price}</p>
+					<p>$ {props.price}</p>
 					<small>{props.desc}</small>
 				</div>
 			</ProductStyled>

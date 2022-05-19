@@ -34,7 +34,7 @@ const Home: NextPage = (props: any) => {
 	useEffect(() => {
 		const productsArr = props.stones.stones;
 		setProducts(productsArr);
-	}, [props.stones]);
+	}, [props.stones.stones]);
 
 	const theme = useTheme();
 	return (
