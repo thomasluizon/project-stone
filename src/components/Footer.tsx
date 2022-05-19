@@ -15,7 +15,7 @@ const Footer = () => {
 	const theme = useTheme();
 	return (
 		<FooterStyled theme={theme}>
-			<Container padding="0 2rem">
+			<Container>
 				<div className="wrapper">
 					<p>&copy; All rights reserved {new Date().getFullYear()}.</p>
 				</div>
