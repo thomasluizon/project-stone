@@ -3,20 +3,11 @@ import Container from '../global/Container';
 import { IProduct } from '../core/product';
 import styled, { useTheme } from 'styled-components';
 import Title from '../components/Title';
-import Head from 'next/head';
+import Carrousel from '../components/Carrousel';
 
 const HomeSection = styled.section`
 	.wrapper {
 		${props => props.theme.flex()}
-		&-col {
-			${props => props.theme.flexcol()}
-		}
-	}
-
-	.trending-container {
-		.trending-card {
-			width: 50%;
-		}
 	}
 `;
 
@@ -39,29 +30,17 @@ const Home: NextPage = (props: any) => {
 		return b.sales - a.sales;
 	});
 
-	const trending = [filtered[0], filtered[1], filtered[2]];
-	console.log(trending);
+	const trending = [filtered[0], filtered[1], filtered[2], filtered[3]];
 
 	return (
-		<>
-			<Head>
-				<title>Project Stone - Home</title>
-			</Head>
-			<HomeSection theme={theme}>
-				<Container>
-					<div className="wrapper wrapper-col">
-						<Title>Most Selled</Title>
-						<div className="wrapper trending-container">
-							{trending.map(stone => (
-								<div key={stone.id} className="trending-card">
-									<img alt="Stone" src={stone.image} />
-								</div>
-							))}
-						</div>
-					</div>
-				</Container>
-			</HomeSection>
-		</>
+		<HomeSection theme={theme}>
+			<Container>
+				<div className="wrapper">
+					<Title>Most Selled</Title>
+				</div>
+				<Carrousel trending={trending} />
+			</Container>
+		</HomeSection>
 	);
 };
 
