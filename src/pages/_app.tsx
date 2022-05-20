@@ -3,6 +3,8 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import theme from '../global/theme';
 import Layout from '../components/Layout';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import React, { Context, useState } from 'react';
+import { IProduct } from '../core/product';
 
 const GlobalStyle = createGlobalStyle`
 	*, *::before, *::after {
@@ -27,16 +29,20 @@ const GlobalStyle = createGlobalStyle`
 		}
 `;
 
+export const ThemeContext: Context<{}> = React.createContext({});
+
 function MyApp({ Component, pageProps }: AppProps) {
+	const [products, setProducts] = useState<IProduct[]>();
+
 	return (
-		<>
+		<ThemeContext.Provider value={{ products, setProducts }}>
 			<GlobalStyle />
 			<ThemeProvider theme={theme}>
 				<Layout>
 					<Component {...pageProps} />
 				</Layout>
 			</ThemeProvider>
-		</>
+		</ThemeContext.Provider>
 	);
 }
 
