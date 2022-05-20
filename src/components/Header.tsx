@@ -40,7 +40,6 @@ const HeaderStyled = styled.header`
 			bottom: 0;
 			${props => props.theme.flex()}
 			transform: translateX(-100%);
-			transition: 0.2s transform;
 			ul {
 				flex-direction: column;
 				a {
