@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 const SearchForm = styled.div`

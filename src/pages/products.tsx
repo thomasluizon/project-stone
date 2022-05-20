@@ -4,10 +4,11 @@ import styled, { useTheme } from 'styled-components';
 import Container from '../global/Container';
 import Title from '../components/Title';
 import ProductsComp from '../components/ProductsComp';
-import { FormEvent, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { IProduct } from '../core/product';
 import Search from '../components/Search';
 import { ThemeContext } from './_app';
+import Filter from '../components/Filter';
 
 export const getStaticProps = async () => {
 	const stones = await fetch('https://project-stone.vercel.app/api/products')
@@ -27,22 +28,38 @@ const ProductsSection = styled.section`
 		${props => props.theme.flex()};
 		flex-direction: column;
 		gap: 2rem;
+
+		.wrapper-filter {
+			${props => props.theme.flex()};
+			gap: 2rem;
+		}
 	}
 `;
 
 const Products: NextPage = (props: any) => {
-	const { products, setProducts }: any = useContext(ThemeContext);
+	const { products, setProducts, categories, setCategories }: any =
+		useContext(ThemeContext);
+	const [inputValue, setInputValue] = useState('');
+	const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+
 	useEffect(() => {
 		const productsArr = props.stones.stones;
 		setProducts(productsArr);
 		setFilteredProducts(productsArr);
-	}, [props.stones.stones, setProducts, products]);
+		setCategories(getCategories(productsArr));
+	}, [props.stones.stones, setProducts, products, setCategories]);
 
-	const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+	const getCategories = (productsArray: IProduct[]) => {
+		const newProductsArray: string[] = [];
+		productsArray.forEach((e: IProduct) => {
+			if (!newProductsArray.includes(e.category))
+				newProductsArray.push(e.category);
+		});
+		return newProductsArray;
+	};
 
 	const theme = useTheme();
 
-	const [inputValue, setInputValue] = useState('');
 	const handleSearch = (value: string) => {
 		const regex = new RegExp(value, 'gi');
 		setInputValue(value);
@@ -58,21 +75,22 @@ const Products: NextPage = (props: any) => {
 	return (
 		<>
 			<Head>
-				<title>Project Stone - Home</title>
+				<title>Project Stone - Products</title>
 			</Head>
-			<>
-				<ProductsSection theme={theme}>
-					<Container>
-						<div className="wrapper">
-							<header>
-								<Title>Products</Title>
-							</header>
+			<ProductsSection theme={theme}>
+				<Container>
+					<div className="wrapper">
+						<header>
+							<Title>Products</Title>
+						</header>
+						<div className="wrapper-filter">
 							<Search inputValue={inputValue} handleSearch={handleSearch} />
-							<ProductsComp products={filteredProducts} />
+							<Filter />
 						</div>
-					</Container>
-				</ProductsSection>
-			</>
+						<ProductsComp products={filteredProducts} />
+					</div>
+				</Container>
+			</ProductsSection>
 		</>
 	);
 };

@@ -3,6 +3,7 @@ import Container from '../global/Container';
 import { IProduct } from '../core/product';
 import styled, { useTheme } from 'styled-components';
 import Title from '../components/Title';
+import Head from 'next/head';
 
 const HomeSection = styled.section`
 	.wrapper {
@@ -42,20 +43,25 @@ const Home: NextPage = (props: any) => {
 	console.log(trending);
 
 	return (
-		<HomeSection theme={theme}>
-			<Container>
-				<div className="wrapper wrapper-col">
-					<Title>Most Selled</Title>
-					<div className="wrapper trending-container">
-						{trending.map(stone => (
-							<div key={stone.id} className="trending-card">
-								<img src={stone.image} />
-							</div>
-						))}
+		<>
+			<Head>
+				<title>Project Stone - Home</title>
+			</Head>
+			<HomeSection theme={theme}>
+				<Container>
+					<div className="wrapper wrapper-col">
+						<Title>Most Selled</Title>
+						<div className="wrapper trending-container">
+							{trending.map(stone => (
+								<div key={stone.id} className="trending-card">
+									<img alt="Stone" src={stone.image} />
+								</div>
+							))}
+						</div>
 					</div>
-				</div>
-			</Container>
-		</HomeSection>
+				</Container>
+			</HomeSection>
+		</>
 	);
 };
 

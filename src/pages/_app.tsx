@@ -33,9 +33,12 @@ export const ThemeContext: Context<{}> = React.createContext({});
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [products, setProducts] = useState<IProduct[]>();
+	const [categories, setCategories] = useState([]);
 
 	return (
-		<ThemeContext.Provider value={{ products, setProducts }}>
+		<ThemeContext.Provider
+			value={{ products, setProducts, categories, setCategories }}
+		>
 			<GlobalStyle />
 			<ThemeProvider theme={theme}>
 				<Layout>
