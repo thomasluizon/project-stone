@@ -11,7 +11,6 @@ export const getStaticProps = async () => {
    const stones = await fetch('https://project-stone.vercel.app/api/products')
       .then(res => res.json())
       .then(json => json);
-
    return {
       revalidate: 86400,
       props: {
