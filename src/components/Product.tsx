@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styled, { useTheme } from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -18,10 +19,26 @@ const ProductStyled = styled.div`
 	overflow: hidden;
 	cursor: pointer;
 	transition: 0.3s height;
-	height: 370px;
+	height: 440px;
+
+	@media screen and (max-width: 768px) {
+		width: 100%;
+	}
+
+	.img-wrapper {
+		width: 100%;
+		display: grid;
+		place-items: center;
+
+		img {
+			width: 100%;
+			height: 250px;
+			object-fit: cover;
+		}
+	}
 
 	&:hover {
-		height: 500px;
+		height: 600px;
 	}
 
 	.desc {
@@ -59,15 +76,8 @@ const Product = (props: ProductProps) => {
 	return (
 		<Link href={`/product/${props.id}`}>
 			<ProductStyled theme={theme}>
-				<div>
-					<Image
-						width="250px"
-						height="250px"
-						layout="responsive"
-						src={props.img}
-						alt="Stone image"
-						sizes="50vw"
-					/>
+				<div className="img-wrapper">
+					<img src={props.img} alt="Stone image" />
 				</div>
 				<div className="desc">
 					<div className="desc__header">

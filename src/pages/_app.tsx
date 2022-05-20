@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import theme from '../global/theme';
 import Layout from '../components/Layout';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const GlobalStyle = createGlobalStyle`
 	*, *::before, *::after {
@@ -20,19 +21,23 @@ const GlobalStyle = createGlobalStyle`
 		list-style: none;
 		font-weight: 300;
 	}
+
+	body.mobile {
+			overflow-y: hidden;
+		}
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
-   return (
-      <>
-         <GlobalStyle />
-         <ThemeProvider theme={theme}>
-            <Layout>
-               <Component {...pageProps} />
-            </Layout>
-         </ThemeProvider>
-      </>
-   );
+	return (
+		<>
+			<GlobalStyle />
+			<ThemeProvider theme={theme}>
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</ThemeProvider>
+		</>
+	);
 }
 
 export default MyApp;

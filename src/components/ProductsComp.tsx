@@ -6,6 +6,9 @@ const StyledProducts = styled.div`
 	${props => props.theme.flex('center', 'flex-start')};
 	flex-wrap: wrap;
 	gap: 2rem;
+	@media screen and (max-width: 768px) {
+		flex-direction: column;
+	}
 `;
 
 interface ProductsProps {
