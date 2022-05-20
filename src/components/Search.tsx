@@ -43,9 +43,6 @@ const Search = (props: SearchProps) => {
 				value={props.inputValue}
 				onChange={e => props.handleSearch(e.target.value)}
 			/>
-			<button>
-				<i className="bi bi-search"></i>
-			</button>
 		</SearchForm>
 	);
 };

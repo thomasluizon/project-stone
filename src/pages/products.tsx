@@ -32,6 +32,7 @@ const ProductsSection = styled.section`
 		.wrapper-filter {
 			${props => props.theme.flex()};
 			gap: 2rem;
+			position: relative;
 		}
 	}
 `;
