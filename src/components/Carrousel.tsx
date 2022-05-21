@@ -1,5 +1,5 @@
 import styled, { useTheme } from 'styled-components';
-import { MutableRefObject, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import Link from 'next/link';
 
@@ -10,7 +10,8 @@ interface IButton {
 const moveSelected = (
    ref: MutableRefObject<any>,
    setDisabledButton: Dispatch<SetStateAction<boolean>>,
-   direction: string
+   direction: string,
+   duration: number
 ) => {
    const refItems = ref.current.querySelectorAll('.trending-item');
    const refLength = refItems.length;
@@ -22,30 +23,54 @@ const moveSelected = (
 
    setDisabledButton(true);
 
-   setTimeout(() => {
-      setDisabledButton(false);
-   }, 500);
+   setTimeout(
+      () => {
+         setDisabledButton(false);
+      },
+      duration > 100 ? duration - 100 : duration
+   );
+
+   refItems[activeIndex].classList.remove('trending-item--active-rtl');
+   refItems[activeIndex].classList.remove('trending-item--active-ltr');
+   refItems[activeIndex].classList.remove('trending-item--active');
+
+   const nextRefItem =
+      activeIndex + 1 > refLength - 1 ? refItems[0] : refItems[activeIndex + 1];
+   const prevRefItem =
+      activeIndex - 1 < 0 ? refItems[refLength - 1] : refItems[activeIndex - 1];
 
    switch (direction) {
       case 'right':
-         const nextRefItem =
-            activeIndex + 1 > refLength - 1
-               ? refItems[0]
-               : refItems[activeIndex + 1];
          nextRefItem.classList.add('trending-item--active');
+         nextRefItem.classList.add('trending-item--active-ltr');
+         refItems[activeIndex].classList.add('trending-item--active');
+         refItems[activeIndex].classList.add(
+            'trending-item--active-sliding--right'
+         );
+         setTimeout(() => {
+            refItems[activeIndex].classList.remove('trending-item--active');
+            refItems[activeIndex].classList.remove(
+               'trending-item--active-sliding--right'
+            );
+         }, duration);
          break;
       case 'left':
-         const prevRefItem =
-            activeIndex - 1 < 0
-               ? refItems[refLength - 1]
-               : refItems[activeIndex - 1];
          prevRefItem.classList.add('trending-item--active');
+         prevRefItem.classList.add('trending-item--active-rtl');
+         refItems[activeIndex].classList.add('trending-item--active');
+         refItems[activeIndex].classList.add(
+            'trending-item--active-sliding--left'
+         );
+         setTimeout(() => {
+            refItems[activeIndex].classList.remove('trending-item--active');
+            refItems[activeIndex].classList.remove(
+               'trending-item--active-sliding--left'
+            );
+         }, duration);
          break;
       default:
          throw new Error('Invalid direction!');
    }
-
-   refItems[activeIndex].classList.remove('trending-item--active');
 };
 
 const Button = styled.button`
@@ -57,7 +82,7 @@ const Button = styled.button`
    background: black;
    border-radius: 100%;
    padding: 0.5rem;
-   z-index: 1;
+   z-index: 2;
 
    .bi {
       background: transparent;
@@ -78,7 +103,7 @@ const Button = styled.button`
    }
 `;
 
-const CarrouselContainer = styled.div`
+const CarrouselContainer: any = styled.div`
    position: relative;
    .trending-carrousel {
       position: relative;
@@ -94,6 +119,7 @@ const CarrouselContainer = styled.div`
       .trending-item {
          width: 100%;
          height: 100%;
+         display: none;
 
          &-image {
             width: 100%;
@@ -105,22 +131,49 @@ const CarrouselContainer = styled.div`
                object-fit: cover;
             }
          }
-
-         display: none;
-
          &--active {
-            position: relative;
+            position: absolute;
             display: block;
-            animation: 0.75s test;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            &-ltr {
+               animation: ${(props: any) => `${props.transitionTime}ms`}
+                  active-ltr;
+            }
+            &-sliding--right {
+               animation: ${(props: any) => `${props.transitionTime}ms`}
+                  slide-ltr;
+            }
          }
 
-         @keyframes test {
+         @keyframes active-ltr {
             0% {
-               right: 1000px;
+               ${(props: any) => {
+                  return props.reference.current != null
+                     ? `left: -${props.reference.current.clientWidth}px;`
+                     : '';
+               }};
             }
 
             100% {
-               right: 0px;
+               left: 0px;
+            }
+         }
+
+         @keyframes slide-ltr {
+            0% {
+               left: 0px;
+            }
+
+            100% {
+               ${(props: any) => {
+                  return props.reference.current != null
+                     ? `left: ${props.reference.current.clientWidth}px;`
+                     : '';
+               }};
             }
          }
       }
@@ -131,13 +184,22 @@ const Carrousel = (props: any) => {
    const [disabledButton, setDisabledButton] = useState(false);
    const theme = useTheme();
    const carrouselRef = useRef(null);
+   const transitionTime = 750;
 
    return (
-      <CarrouselContainer>
+      <CarrouselContainer
+         transitionTime={transitionTime}
+         reference={carrouselRef}
+      >
          <Button
             id="prevButton"
             onClick={() => {
-               moveSelected(carrouselRef, setDisabledButton, 'left');
+               moveSelected(
+                  carrouselRef,
+                  setDisabledButton,
+                  'left',
+                  transitionTime
+               );
             }}
             disabled={disabledButton}
             right={false}
@@ -145,7 +207,7 @@ const Carrousel = (props: any) => {
          >
             <i className="bi bi-chevron-double-left"></i>
          </Button>
-         <div className="wrapper trending-carrousel" ref={carrouselRef}>
+         <div className="trending-carrousel" ref={carrouselRef}>
             {props.trending.map((stone: any, index: number) => (
                <Link href={`/product/${stone.id}`} key={index}>
                   <div
@@ -162,7 +224,12 @@ const Carrousel = (props: any) => {
          </div>
          <Button
             onClick={() => {
-               moveSelected(carrouselRef, setDisabledButton, 'right');
+               moveSelected(
+                  carrouselRef,
+                  setDisabledButton,
+                  'right',
+                  transitionTime
+               );
             }}
             right={true}
             theme={theme}
