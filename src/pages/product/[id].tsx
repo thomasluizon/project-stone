@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Container from '../../global/Container';
@@ -17,13 +18,18 @@ const Product = (props: any) => {
 	`;
 
 	return (
-		<ProductStyled>
-			<Container>
-				<div className="wrapper">
-					<h1>Id: {element.id}</h1>
-				</div>
-			</Container>
-		</ProductStyled>
+		<>
+			<Head>
+				<title>Project Stone - {element.name}</title>
+			</Head>
+			<ProductStyled>
+				<Container>
+					<div className="wrapper">
+						<h1>Id: {element.id}</h1>
+					</div>
+				</Container>
+			</ProductStyled>
+		</>
 	);
 };
 
