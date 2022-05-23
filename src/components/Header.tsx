@@ -5,7 +5,7 @@ import styled, { useTheme } from 'styled-components';
 import Container from '../global/Container';
 import NavLink from './NavLink';
 interface HeaderProps {
-	unboundTransform: any;
+	unboundTransform: boolean;
 }
 
 const HeaderStyled = styled.header`
