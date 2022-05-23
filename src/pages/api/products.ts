@@ -81,7 +81,7 @@ export default async function handler(
             return obj;
          });
 
-      res.status(200).json({ stones });
+      res.status(200).json({ stones, categories });
    }
 }
 

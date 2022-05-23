@@ -147,13 +147,21 @@ const CarrouselContainer: any = styled.div`
                animation: ${(props: any) => `${props.transitionTime}ms`}
                   slide-ltr;
             }
+            &-rtl {
+               animation: ${(props: any) => `${props.transitionTime}ms`}
+                  active-rtl;
+            }
+            &-sliding--left {
+               animation: ${(props: any) => `${props.transitionTime}ms`}
+                  slide-rtl;
+            }
          }
 
          @keyframes active-ltr {
             0% {
                ${(props: any) => {
                   return props.reference.current != null
-                     ? `left: -${props.reference.current.clientWidth}px;`
+                     ? `left: -${props.reference.current.offsetWidth}px;`
                      : '';
                }};
             }
@@ -171,7 +179,35 @@ const CarrouselContainer: any = styled.div`
             100% {
                ${(props: any) => {
                   return props.reference.current != null
-                     ? `left: ${props.reference.current.clientWidth}px;`
+                     ? `left: ${props.reference.current.offsetWidth}px;`
+                     : '';
+               }};
+            }
+         }
+
+         @keyframes active-rtl {
+            0% {
+               ${(props: any) => {
+                  return props.reference.current != null
+                     ? `left: ${props.reference.current.offsetWidth}px;`
+                     : '';
+               }};
+            }
+
+            100% {
+               left: 0px;
+            }
+         }
+
+         @keyframes slide-rtl {
+            0% {
+               left: 0px;
+            }
+
+            100% {
+               ${(props: any) => {
+                  return props.reference.current != null
+                     ? `left: -${props.reference.current.offsetWidth}px;`
                      : '';
                }};
             }
@@ -184,7 +220,7 @@ const Carrousel = (props: any) => {
    const [disabledButton, setDisabledButton] = useState(false);
    const theme = useTheme();
    const carrouselRef = useRef(null);
-   const transitionTime = 750;
+   const transitionTime = 500;
 
    return (
       <CarrouselContainer
