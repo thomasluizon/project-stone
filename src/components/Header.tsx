@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import Container from '../global/Container';
+import NavLink from './NavLink';
 import Title from './Title';
 
 interface HeaderProps {
@@ -107,26 +108,21 @@ const Header = () => {
 					</Link>
 					<nav className={mobileDrawer ? 'mobile' : ''}>
 						<ul>
-							<li onClick={() => setMobileDrawer(false)}>
-								<Link href="/products/">
-									<a>Products</a>
-								</Link>
-							</li>
-							<li onClick={() => setMobileDrawer(false)}>
-								<Link href="/contact/">
-									<a>Contact</a>
-								</Link>
-							</li>
-							<li onClick={() => setMobileDrawer(false)}>
-								<Link href="/auth/login/">
-									<a>Login</a>
-								</Link>
-							</li>
-							<li onClick={() => setMobileDrawer(false)}>
-								<Link href="/auth/signup/">
-									<a>Sign-up</a>
-								</Link>
-							</li>
+							<NavLink href="/" setMobileDrawer={setMobileDrawer}>
+								Home
+							</NavLink>
+							<NavLink href="/products/" setMobileDrawer={setMobileDrawer}>
+								Products
+							</NavLink>
+							<NavLink href="/contact/" setMobileDrawer={setMobileDrawer}>
+								Contact
+							</NavLink>
+							<NavLink href="/auth/login/" setMobileDrawer={setMobileDrawer}>
+								Login
+							</NavLink>
+							<NavLink href="/auth/signup/" setMobileDrawer={setMobileDrawer}>
+								Sign-up
+							</NavLink>
 							<Icon
 								onClick={() => (
 									setMobileDrawer(false),
