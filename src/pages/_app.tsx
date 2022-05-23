@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import React, { Context, useState } from 'react';
 import { IProduct } from '../core/product';
+import { ICategory } from '../core/category';
 
 const GlobalStyle = createGlobalStyle`
 	*, *::before, *::after {
@@ -16,7 +17,6 @@ const GlobalStyle = createGlobalStyle`
 		-webkit-font-smoothing: antialiased;
 		border: none;
 		outline: none;
-		appearance: none;
 		background-color: ${theme.colors.bg};
 		color: ${theme.colors.white};
 		text-decoration: none;
@@ -33,7 +33,7 @@ export const ThemeContext: Context<{}> = React.createContext({});
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [products, setProducts] = useState<IProduct[]>();
-	const [categories, setCategories] = useState([]);
+	const [categories, setCategories] = useState<ICategory[]>([]);
 
 	return (
 		<ThemeContext.Provider

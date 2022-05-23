@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useContext } from 'react';
 import styled, { useTheme } from 'styled-components';
+import { ICategory } from '../core/category';
 import { IProduct } from '../core/product';
+import { ThemeContext } from '../pages/_app';
 import Product from './Product';
 
 const StyledProducts = styled.div`
@@ -18,21 +20,45 @@ interface ProductsProps {
 
 const ProductsComp = (props: ProductsProps) => {
 	const theme = useTheme();
+	const { categories }: any = useContext(ThemeContext);
+	const isCheckedNone =
+		categories.filter((category: ICategory) => category.isChecked).length === 0;
+
 	return (
 		<StyledProducts theme={theme}>
 			{props.products.length !== 0 ? (
 				props.products.map(product => {
-					return (
-						<Product
-							key={product.id}
-							img={product.image}
-							price={product.price}
-							desc={product.description}
-							name={product.name}
-							id={product.id}
-							category={product.category}
-						/>
-					);
+					let returnValue = <></>;
+					if (!isCheckedNone) {
+						categories.forEach((category: ICategory) => {
+							if (category.name === product.category && category.isChecked) {
+								returnValue = (
+									<Product
+										key={product.id}
+										img={product.image}
+										price={product.price}
+										desc={product.description}
+										name={product.name}
+										id={product.id}
+										category={product.category}
+									/>
+								);
+							}
+						});
+					} else {
+						returnValue = (
+							<Product
+								key={product.id}
+								img={product.image}
+								price={product.price}
+								desc={product.description}
+								name={product.name}
+								id={product.id}
+								category={product.category}
+							/>
+						);
+					}
+					return returnValue;
 				})
 			) : (
 				<p>Sorry, product not found.</p>

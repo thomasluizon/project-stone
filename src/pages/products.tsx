@@ -9,6 +9,7 @@ import { IProduct } from '../core/product';
 import Search from '../components/Search';
 import { ThemeContext } from './_app';
 import Filter from '../components/Filter';
+import { ICategory } from '../core/category';
 
 export const getStaticProps = async () => {
 	const stones = await fetch('https://project-stone.vercel.app/api/products')
@@ -38,7 +39,7 @@ const ProductsSection = styled.section`
 `;
 
 const Products: NextPage = (props: any) => {
-	const { products, setProducts, categories, setCategories }: any =
+	const { products, setProducts, setCategories }: any =
 		useContext(ThemeContext);
 	const [inputValue, setInputValue] = useState('');
 	const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
@@ -47,17 +48,23 @@ const Products: NextPage = (props: any) => {
 		const productsArr = props.stones.stones;
 		setProducts(productsArr);
 		setFilteredProducts(productsArr);
-		setCategories(getCategories(productsArr));
-	}, [props.stones.stones, setProducts, products, setCategories]);
 
-	const getCategories = (productsArray: IProduct[]) => {
-		const newProductsArray: string[] = [];
-		productsArray.forEach((e: IProduct) => {
-			if (!newProductsArray.includes(e.category))
-				newProductsArray.push(e.category);
+		const categories: ICategory[] = [];
+
+		props.stones.categories.forEach((category: string) => {
+			categories.push({
+				name: category,
+				isChecked: true,
+			});
 		});
-		return newProductsArray;
-	};
+		setCategories(categories);
+	}, [
+		props.stones.stones,
+		props.stones.categories,
+		setProducts,
+		products,
+		setCategories,
+	]);
 
 	const theme = useTheme();
 
