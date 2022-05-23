@@ -54,7 +54,7 @@ const Products: NextPage = (props: any) => {
 		props.stones.categories.forEach((category: string) => {
 			categories.push({
 				name: category,
-				isChecked: true,
+				isChecked: false,
 			});
 		});
 		setCategories(categories);
