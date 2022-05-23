@@ -1,30 +1,30 @@
 {
-	"name": "project-stone",
-	"version": "1.0.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"deploy": "npm run build && npm start"
-	},
-	"dependencies": {
-		"bootstrap-icons": "^1.8.2",
-		"firebase": "^9.8.1",
-		"next": "12.1.6",
-		"react": "18.1.0",
-		"react-dom": "18.1.0",
-		"sharp": "^0.30.4",
-		"styled-components": "^5.3.5"
-	},
-	"devDependencies": {
-		"@types/node": "17.0.34",
-		"@types/react": "18.0.9",
-		"@types/react-dom": "18.0.4",
-		"@types/styled-components": "^5.1.25",
-		"eslint": "8.15.0",
-		"eslint-config-next": "12.1.6",
-		"typescript": "4.6.4"
-	}
+   "name": "project-stone",
+   "version": "1.0.0",
+   "private": true,
+   "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint",
+      "deploy": "npm run build && npm start"
+   },
+   "dependencies": {
+      "bootstrap-icons": "^1.8.2",
+      "firebase": "^9.8.1",
+      "next": "12.1.6",
+      "react": "18.1.0",
+      "react-dom": "18.1.0",
+      "sharp": "^0.30.4",
+      "styled-components": "^5.3.5"
+   },
+   "devDependencies": {
+      "@types/node": "17.0.34",
+      "@types/react": "18.0.9",
+      "@types/react-dom": "18.0.4",
+      "@types/styled-components": "^5.1.25",
+      "eslint": "8.15.0",
+      "eslint-config-next": "12.1.6",
+      "typescript": "4.6.4"
+   }
 }

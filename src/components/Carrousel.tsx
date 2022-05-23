@@ -2,6 +2,7 @@ import styled, { useTheme } from 'styled-components';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import Link from 'next/link';
+import { IProduct } from '../core/product';
 
 interface IButton {
    right: boolean;
@@ -111,6 +112,7 @@ const CarrouselContainer: any = styled.div`
       width: 100%;
       height: 600px;
       overflow: hidden;
+      cursor: pointer;
 
       &:hover {
          box-shadow: 0px 0px 10px 1px white;
@@ -124,13 +126,31 @@ const CarrouselContainer: any = styled.div`
          &-image {
             width: 100%;
             height: 100%;
+            position: relative;
 
             img {
                width: 100%;
                height: 100%;
                object-fit: cover;
             }
+
+            &-description {
+               display: block;
+               position: absolute;
+               padding: 0.5rem 0.5rem 0 1rem;
+               bottom: 0;
+               transition: height 0.5s;
+               height: 0;
+            }
          }
+
+         &-image:hover {
+            .trending-item-image-description {
+               display: block;
+               height: 100%;
+            }
+         }
+
          &--active {
             position: absolute;
             display: block;
@@ -244,7 +264,7 @@ const Carrousel = (props: any) => {
             <i className="bi bi-chevron-double-left"></i>
          </Button>
          <div className="trending-carrousel" ref={carrouselRef}>
-            {props.trending.map((stone: any, index: number) => (
+            {props.trending.map((stone: IProduct, index: number) => (
                <Link href={`/product/${stone.id}`} key={index}>
                   <div
                      className={`trending-item ${
@@ -253,6 +273,9 @@ const Carrousel = (props: any) => {
                   >
                      <div className="trending-item-image">
                         <img src={stone.image} alt="Stone" />
+                        <div className="trending-item-image-description">
+                           <p>{stone.description}</p>
+                        </div>
                      </div>
                   </div>
                </Link>
