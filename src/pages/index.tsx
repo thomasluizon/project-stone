@@ -35,7 +35,7 @@ const Home: NextPage = (props: any) => {
 		<HomeSection theme={theme}>
 			<Container>
 				<div className="wrapper">
-					<Title>Most Selled</Title>
+					<Title>Best-sellers</Title>
 				</div>
 				<Carrousel trending={trending} />
 			</Container>
