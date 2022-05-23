@@ -161,19 +161,19 @@ const CarrouselContainer: any = styled.div`
             bottom: 0;
             &-ltr {
                animation: ${(props: any) => `${props.transitionTime}ms`}
-                  active-ltr;
+                  active-rtl;
             }
             &-sliding--right {
                animation: ${(props: any) => `${props.transitionTime}ms`}
-                  slide-ltr;
+                  slide-rtl;
             }
             &-rtl {
                animation: ${(props: any) => `${props.transitionTime}ms`}
-                  active-rtl;
+                  active-ltr;
             }
             &-sliding--left {
                animation: ${(props: any) => `${props.transitionTime}ms`}
-                  slide-rtl;
+                  slide-ltr;
             }
          }
 
