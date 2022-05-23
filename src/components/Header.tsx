@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import Container from '../global/Container';
 import NavLink from './NavLink';
-import Title from './Title';
-
 interface HeaderProps {
 	unboundTransform: any;
 }
@@ -15,6 +13,14 @@ const HeaderStyled = styled.header`
 	padding: 2rem 0;
 
 	.wrapper {
+		.logo {
+			img {
+				max-width: 100px;
+			}
+			${props => props.theme.flex()};
+			gap: 1rem;
+		}
+
 		${props => props.theme.flex('space-between', 'center')}
 		height: 100%;
 	}
@@ -102,8 +108,8 @@ const Header = () => {
 			<Container>
 				<div className="wrapper">
 					<Link href="/">
-						<a>
-							<Title>Project Stone (pedra)</Title>
+						<a className="logo">
+							<img src="/images/favicon.webp" alt="Logo pedra" /> (pedra)
 						</a>
 					</Link>
 					<nav className={mobileDrawer ? 'mobile' : ''}>
