@@ -4,6 +4,7 @@ import { IProduct } from '../core/product';
 import styled, { useTheme } from 'styled-components';
 import Title from '../components/Title';
 import Carrousel from '../components/Carrousel';
+import Head from 'next/head';
 
 const HomeSection = styled.section`
 	.wrapper {
@@ -32,14 +33,19 @@ const Home: NextPage = (props: any) => {
 	const trending = [filtered[0], filtered[1], filtered[2], filtered[3]];
 
 	return (
-		<HomeSection theme={theme}>
-			<Container>
-				<div className="wrapper">
-					<Title>Best-sellers</Title>
-				</div>
-				<Carrousel trending={trending} />
-			</Container>
-		</HomeSection>
+		<>
+			<Head>
+				<title>Project Stone - Home</title>
+			</Head>
+			<HomeSection theme={theme}>
+				<Container>
+					<div className="wrapper">
+						<Title>Best-sellers</Title>
+					</div>
+					<Carrousel trending={trending} />
+				</Container>
+			</HomeSection>
+		</>
 	);
 };
 
