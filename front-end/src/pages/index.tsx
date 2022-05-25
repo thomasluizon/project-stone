@@ -1,15 +1,15 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import Container from '../global/Container';
 import { IProduct } from '../core/product';
 import styled, { useTheme } from 'styled-components';
 import Title from '../components/Title';
 import Carrousel from '../components/Carrousel';
-import Head from 'next/head';
 
 const HomeSection = styled.section`
-	.wrapper {
-		${props => props.theme.flex()}
-	}
+   .wrapper {
+      ${props => props.theme.flex()}
+   }
 `;
 
 export const getStaticProps = async () => {
@@ -25,12 +25,12 @@ export const getStaticProps = async () => {
 };
 
 const Home: NextPage = (props: any) => {
-	const theme = useTheme();
-	const filtered = props.stones.sort((a: IProduct, b: IProduct) => {
-		return b.sales - a.sales;
-	});
+   const theme = useTheme();
+   const filtered = props.stones.sort((a: IProduct, b: IProduct) => {
+      return b.sales - a.sales;
+   });
 
-	const trending = [filtered[0], filtered[1], filtered[2], filtered[3]];
+   const trending = [filtered[0], filtered[1], filtered[2], filtered[3]];
 
 	return (
 		<>
