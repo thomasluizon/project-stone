@@ -37,8 +37,8 @@ const addStone = async (
 };
 
 main()
-	.catch(e => {
-		throw e;
+	.catch(er => {
+		throw er;
 	})
 	.finally(async () => {
 		await prisma.$disconnect();
