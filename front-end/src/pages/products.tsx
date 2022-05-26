@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useContext, useEffect, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import Container from '../global/Container';
 import Title from '../components/Title';
 import ProductsComp from '../components/ProductsComp';
-import { useContext, useEffect, useState } from 'react';
 import { IProduct } from '../core/product';
 import Search from '../components/Search';
 import { ThemeContext } from './_app';

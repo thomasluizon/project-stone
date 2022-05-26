@@ -22,9 +22,11 @@ async function getStone(id: number) {
 app.get('/stones', async (req, res) => {
 	const stones = await getAllStones();
 	const categories: string[] = [];
+
 	stones.forEach(stone => {
 		if (!categories.includes(stone.category)) categories.push(stone.category);
 	});
+
 	res.json({
 		stones,
 		categories,
