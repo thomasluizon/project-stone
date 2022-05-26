@@ -104,7 +104,7 @@ app.post('/contact', async (req, res) => {
 		`,
 	};
 
-	transporter.sendMail(mailData, (e, info) => {
+	transporter.sendMail(mailData, (e: any, info: any) => {
 		if (e) {
 			console.log(e);
 			res.send('error');
