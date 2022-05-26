@@ -72,7 +72,7 @@ const Form = (props: any) => {
 			message,
 		};
 
-		fetch('http://localhost:5000/contact', {
+		fetch('https://project-stone.herokuapp.com/contact', {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json, text/plain, */*',
