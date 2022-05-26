@@ -13,9 +13,7 @@ const HomeSection = styled.section`
 `;
 
 export const getStaticProps = async () => {
-	const stones = await fetch(
-		'https://fathomless-basin-42660.herokuapp.com/pedras'
-	)
+	const stones = await fetch('https://project-stone.herokuapp.com/stones')
 		.then(res => res.json())
 		.then(json => json);
 	return {

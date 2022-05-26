@@ -37,9 +37,7 @@ const Product = (props: any) => {
 };
 
 export const getStaticProps = async () => {
-	const stones = await fetch(
-		'https://fathomless-basin-42660.herokuapp.com/pedras'
-	)
+	const stones = await fetch('https://project-stone.herokuapp.com/stones')
 		.then(res => res.json())
 		.then(json => json);
 
@@ -52,9 +50,7 @@ export const getStaticProps = async () => {
 };
 
 export async function getStaticPaths() {
-	const res = await fetch(
-		'https://fathomless-basin-42660.herokuapp.com/pedras'
-	);
+	const res = await fetch('https://project-stone.herokuapp.com/stones');
 	const products = await res.json();
 	const paths = products.stones.map((post: any) => ({
 		params: { id: post.id.toString() },
