@@ -6,7 +6,9 @@ const prisma = new PrismaClient();
 const main = async () => {
 	const allStones = await prisma.stone.findMany();
 
-	app.listen(3001, () => console.log('server running...\n'));
+	app.listen(process.env.PORT || 3001, () =>
+		console.log('server running...\n')
+	);
 	app.get('/api', (req, res) => {
 		res.json({
 			allStones,
