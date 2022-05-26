@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import express from 'express';
-import cors from 'cors';
-import nodemailer from 'nodemailer';
+const cors = require('cors');
+const nodemailer = require('nodemailer');
 const app = express();
 const prisma = new PrismaClient();
 const port = process.env.PORT || 5000;
