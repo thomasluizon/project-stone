@@ -8,8 +8,8 @@ const FilterMenuStyled = styled.ul`
 	padding: 1rem;
 	border-radius: 0.5rem;
 	position: absolute;
-	bottom: 0;
-	right: -8rem;
+	bottom: 3rem;
+	right: 0;
 	border: 1px solid ${props => props.theme.colors.white};
 	${props => props.theme.flexcol()};
 	align-items: flex-start;
