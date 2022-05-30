@@ -150,8 +150,8 @@ const Form = (props: any) => {
             </FormStyled>
          ) : (
             <h2>
-               'Your email has been sent, we will return to you as soon as
-               possible.'
+               Your email has been sent, we will return to you as soon as
+               possible.
             </h2>
          )}
       </>
