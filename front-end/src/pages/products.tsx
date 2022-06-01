@@ -12,95 +12,100 @@ import Filter from '../components/Filter';
 import { ICategory } from '../core/category';
 
 export const getStaticProps = async () => {
-	const stones = await fetch('https://project-stone.herokuapp.com/stones')
-		.then(res => res.json())
-		.then(json => json);
+   const stones = await fetch('https://project-stone.herokuapp.com/stones')
+      .then(res => res.json())
+      .then(json => json);
 
-	return {
-		revalidate: 86400,
-		props: {
-			stones,
-		},
-	};
+   return {
+      revalidate: 10,
+      props: {
+         stones,
+      },
+   };
 };
 
 const ProductsSection = styled.section`
-	.wrapper {
-		${props => props.theme.flex()};
-		flex-direction: column;
-		gap: 2rem;
+   .wrapper {
+      ${props => props.theme.flex()};
+      flex-direction: column;
+      gap: 2rem;
 
-		.wrapper-filter {
-			${props => props.theme.flex()};
-			gap: 0.5rem;
-			position: relative;
-		}
-	}
+      .wrapper-filter {
+         ${props => props.theme.flex()};
+         gap: 0.5rem;
+         position: relative;
+      }
+   }
 `;
 
 const Products: NextPage = (props: any) => {
-	const { products, setProducts, setCategories }: any =
-		useContext(ThemeContext);
-	const [inputValue, setInputValue] = useState('');
-	const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+   const { products, setProducts, setCategories }: any =
+      useContext(ThemeContext);
+   const [inputValue, setInputValue] = useState('');
+   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
 
-	useEffect(() => {
-		const productsArr = props.stones.stones;
-		setProducts(productsArr);
-		setFilteredProducts(productsArr);
+   useEffect(() => {
+      const productsArr = props.stones.stones;
+      setProducts(productsArr);
+      setFilteredProducts(productsArr);
 
-		const categories: ICategory[] = [];
+      const categories: ICategory[] = [];
 
-		props.stones.categories.forEach((category: string) => {
-			categories.push({
-				name: category,
-				isChecked: false,
-			});
-		});
-		setCategories(categories);
-	}, [
-		props.stones.stones,
-		props.stones.categories,
-		setProducts,
-		products,
-		setCategories,
-	]);
+      props.stones.categories.forEach((category: string) => {
+         categories.push({
+            name: category,
+            isChecked: false,
+         });
+      });
+      setCategories(categories);
+   }, [
+      props.stones.stones,
+      props.stones.categories,
+      setProducts,
+      products,
+      setCategories,
+   ]);
 
-	const theme = useTheme();
+   const theme = useTheme();
 
-	const handleSearch = (value: string) => {
-		const regex = new RegExp(value, 'gi');
-		setInputValue(value);
+   const handleSearch = (value: string) => {
+      const regex = new RegExp(value, 'gi');
+      setInputValue(value);
 
-		if (value.length > 0) {
-			const filtered = products.filter((prod: any) => prod.name.match(regex));
-			setFilteredProducts(filtered);
-		} else {
-			setFilteredProducts(products);
-		}
-	};
+      if (value.length > 0) {
+         const filtered = products.filter((prod: any) =>
+            prod.name.match(regex)
+         );
+         setFilteredProducts(filtered);
+      } else {
+         setFilteredProducts(products);
+      }
+   };
 
-	return (
-		<>
-			<Head>
-				<title>Project Stone - Products</title>
-			</Head>
-			<ProductsSection theme={theme}>
-				<Container>
-					<div className="wrapper">
-						<header>
-							<Title>Products</Title>
-						</header>
-						<div className="wrapper-filter">
-							<Search inputValue={inputValue} handleSearch={handleSearch} />
-							<Filter />
-						</div>
-						<ProductsComp products={filteredProducts} />
-					</div>
-				</Container>
-			</ProductsSection>
-		</>
-	);
+   return (
+      <>
+         <Head>
+            <title>Project Stone - Products</title>
+         </Head>
+         <ProductsSection theme={theme}>
+            <Container>
+               <div className="wrapper">
+                  <header>
+                     <Title>Products</Title>
+                  </header>
+                  <div className="wrapper-filter">
+                     <Search
+                        inputValue={inputValue}
+                        handleSearch={handleSearch}
+                     />
+                     <Filter />
+                  </div>
+                  <ProductsComp products={filteredProducts} />
+               </div>
+            </Container>
+         </ProductsSection>
+      </>
+   );
 };
 
 export default Products;

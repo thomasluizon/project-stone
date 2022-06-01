@@ -1,9 +1,18 @@
 import Head from 'next/head';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Container from '../../global/Container';
 
 const Product = (props: any) => {
-   const stone = props.stone.stone;
+   const stone = props.stone;
+   const router = useRouter();
+
+   useEffect(() => {
+      if (!stone) {
+         router.push('/');
+      }
+   }, []);
 
    const ProductStyled = styled.div`
       .wrapper {
@@ -13,7 +22,7 @@ const Product = (props: any) => {
       }
    `;
 
-   return (
+   return stone ? (
       <>
          <Head>
             <title>Project Stone - {stone.name}</title>
@@ -27,33 +36,23 @@ const Product = (props: any) => {
             </Container>
          </ProductStyled>
       </>
+   ) : (
+      <h1>Nenhuma pedra encontrada aqui</h1>
    );
 };
 
-export const getStaticProps = async (_props: any) => {
+export const getServerSideProps = async (context: any) => {
    const stone = await fetch(
-      'https://project-stone.herokuapp.com/stone/' + _props.params.id
+      'https://project-stone.herokuapp.com/stone/' + context.query.id
    )
       .then(res => res.json())
       .then(json => json);
 
    return {
       props: {
-         stone,
+         stone: stone.stone,
       },
    };
 };
-
-export async function getStaticPaths() {
-   const res = await fetch('https://project-stone.herokuapp.com/stones');
-
-   const products = await res.json();
-
-   const paths = products.stones.map((post: any) => ({
-      params: { id: post.id.toString() },
-   }));
-
-   return { paths, fallback: false };
-}
 
 export default Product;
